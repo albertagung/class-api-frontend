@@ -37,7 +37,7 @@ $(document).ready( async () => {
 			`)
 		} else {
 			$('#classInput').append(`
-				<option value="${classroom.id}" selected>${classroom.name}</option>
+				<option value="${classroom.id}">${classroom.name}</option>
 			`)
 		}
 	})
