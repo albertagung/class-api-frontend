@@ -6,7 +6,7 @@ $(document).ready(() => {
 	// DataTable init
   let userTable = $('#users_table').DataTable({
   	ajax: {
-  		url: 'https://testing-255716.appspot.com/users',
+  		url: 'http://localhost:3000/users',
   		dataSrc: ''
   	},
   	columns: [
@@ -31,7 +31,7 @@ $(document).ready(() => {
   // DataTable init
   let classroomTable = $('#classrooms_table').DataTable({
   	ajax: {
-  		url: 'https://testing-255716.appspot.com/classrooms',
+  		url: 'http://localhost:3000/classrooms',
   		dataSrc: ''
   	},
   	columns: [

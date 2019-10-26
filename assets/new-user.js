@@ -4,7 +4,7 @@ $(document).ready( async () => {
 	$.LoadingOverlay('show')
 
 	// Define response axios from finding all available classes
-	let resGetAllClassrooms = await axios.get(`https://testing-255716.appspot.com/classrooms`)
+	let resGetAllClassrooms = await axios.get(`http://localhost:3000/classrooms`)
 	let classroomData = await resGetAllClassrooms.data
 
 	// Populate classrooms on the form
@@ -23,7 +23,7 @@ $(document).ready( async () => {
 		// Loading overlay show
 		$.LoadingOverlay('show')
 		// Define url save
-		let urlSave = `https://testing-255716.appspot.com/users/create`
+		let urlSave = `http://localhost:3000/users/create`
 		// Update via axios
 		axios({
 			method: 'post',

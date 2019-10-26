@@ -18,7 +18,7 @@ $(document).ready( async () => {
 	}
 
 	// Define response axios from finding class by id
-	let resGetClassroomDetails = await axios.get(`https://testing-255716.appspot.com/classrooms/find/${getQueryValue().id}`)
+	let resGetClassroomDetails = await axios.get(`http://localhost:3000/classrooms/find/${getQueryValue().id}`)
 	let classroomData = await resGetClassroomDetails.data[0]
 
 	// Populate user data on the form
@@ -49,7 +49,7 @@ $(document).ready( async () => {
 		// Loading overlay show
 		$.LoadingOverlay('show')
 		// Define url update
-		let urlUpdate = `https://testing-255716.appspot.com/classrooms/update/${getQueryValue().id}`
+		let urlUpdate = `http://localhost:3000/classrooms/update/${getQueryValue().id}`
 		// Update via axios
 		axios({
 			method: 'put',
@@ -89,7 +89,7 @@ $(document).ready( async () => {
 		    // Loading overlay show
 				$.LoadingOverlay('show')
 				// Define url update
-				let urlDelete = `https://testing-255716.appspot.com/classrooms/remove/${getQueryValue().id}`
+				let urlDelete = `http://localhost:3000/classrooms/remove/${getQueryValue().id}`
 				// Update via axios
 				axios({
 					method: 'delete',

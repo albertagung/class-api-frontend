@@ -5,7 +5,7 @@ $(document).ready( async () => {
 		// Loading overlay show
 		$.LoadingOverlay('show')
 		// Define url save
-		let urlSave = `https://testing-255716.appspot.com/classrooms/create`
+		let urlSave = `http://localhost:3000/classrooms/create`
 		// Create via axios
 		axios({
 			method: 'post',

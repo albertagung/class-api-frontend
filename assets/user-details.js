@@ -18,11 +18,39 @@ $(document).ready( async () => {
 	}
 
 	// Define response axios from finding class by id
-	let resGetUserDetails = await axios.get(`https://testing-255716.appspot.com/users/find/${getQueryValue().id}`)
+	let resGetUserDetails = await axios.get(`http://localhost:3000/users/find/${getQueryValue().id}`, { withCredentials: true}).catch((err) => {
+		if (err.response.status === 401) {
+			// Loading overlay hide
+			$.LoadingOverlay('hide')
+			Swal.fire({
+			  type: 'error',
+			  title: 'Unauthorized',
+			  text: 'You need to log in'
+			})
+			.then(() => {
+				// Redirect to login
+				window.location.assign('login.html')
+			})
+		}
+	})
 	let userData = await resGetUserDetails.data[0]
 
 	// Define response axios from finding all available classes
-	let resGetAllClassrooms = await axios.get(`https://testing-255716.appspot.com/classrooms`)
+	let resGetAllClassrooms = await axios.get(`http://localhost:3000/classrooms`, { withCredentials: true}).catch((err) => {
+		if (err.response.status === 401) {
+			// Loading overlay hide
+			$.LoadingOverlay('hide')
+			Swal.fire({
+			  type: 'error',
+			  title: 'Unauthorized',
+			  text: 'You need to log in'
+			})
+			.then(() => {
+				// Redirect to login
+				window.location.assign('login.html')
+			})
+		}
+	})
 	let classroomData = await resGetAllClassrooms.data
 
 	// Populate user data on the form
@@ -50,13 +78,15 @@ $(document).ready( async () => {
 		// Loading overlay show
 		$.LoadingOverlay('show')
 		// Define url update
-		let urlUpdate = `https://testing-255716.appspot.com/users/update/${getQueryValue().id}`
+		let urlUpdate = `http://localhost:3000/users/update/${getQueryValue().id}`
 		// Update via axios
 		axios({
 			method: 'put',
 			url: urlUpdate,
+			withCredentials: true,
 			data: {
 				username: $('#usernameInput').val(),
+				password: $('#passwordInput').val(),
 				name: $('#nameInput').val(),
 				ClassroomId: $('#classInput').val()
 			}
@@ -92,11 +122,12 @@ $(document).ready( async () => {
 		    // Loading overlay show
 				$.LoadingOverlay('show')
 				// Define url update
-				let urlDelete = `https://testing-255716.appspot.com/users/remove/${getQueryValue().id}`
+				let urlDelete = `http://localhost:3000/users/remove/${getQueryValue().id}`
 				// Update via axios
 				axios({
 					method: 'delete',
-					url: urlDelete
+					url: urlDelete,
+					withCredentials: true
 				})
 				.then((response) => {
 					// Redirect window back
