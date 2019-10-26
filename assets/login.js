@@ -11,7 +11,7 @@ $(document).ready(() => {
 			// Loading overlay start
 			$.LoadingOverlay('show')
 			// Define login url
-			let urlLogin = 'http://localhost:3000/users/login'
+			let urlLogin = 'https://testing-255716.appspot.com/users/login'
 			// Send login credentials to server
 			axios({
 				method: 'post',

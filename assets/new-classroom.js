@@ -5,21 +5,21 @@ $(document).ready( async () => {
 		// Loading overlay show
 		$.LoadingOverlay('show')
 		// Define url save
-		let urlSave = `http://localhost:3000/classrooms/create`
+		let urlSave = `https://testing-255716.appspot.com/classrooms/create`
 		// Create via axios
 		axios({
 			method: 'post',
 			url: urlSave,
 			data: {
 				name: $('#classNameInput').val()
-			}
+			},
+			withCredentials: true
 		})
 		.then((response) => {
 			// Redirect window back
 			window.location.assign('index.html')
 		})
 		.catch((err) => {
-			console.log(err)
 			Swal.fire({
 			  type: 'error',
 			  title: 'Oops...',
