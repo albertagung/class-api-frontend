@@ -18,11 +18,39 @@ $(document).ready( async () => {
 	}
 
 	// Define response axios from finding class by id
-	let resGetUserDetails = await axios.get(`https://testing-255716.appspot.com/users/find/${getQueryValue().id}`)
+	let resGetUserDetails = await axios.get(`https://testing-255716.appspot.com/users/find/${getQueryValue().id}`, { withCredentials: true}).catch((err) => {
+		if (err.response.status === 401) {
+			// Loading overlay hide
+			$.LoadingOverlay('hide')
+			Swal.fire({
+			  type: 'error',
+			  title: 'Unauthorized',
+			  text: 'You need to log in'
+			})
+			.then(() => {
+				// Redirect to login
+				window.location.assign('login.html')
+			})
+		}
+	})
 	let userData = await resGetUserDetails.data[0]
 
 	// Define response axios from finding all available classes
-	let resGetAllClassrooms = await axios.get(`https://testing-255716.appspot.com/classrooms`)
+	let resGetAllClassrooms = await axios.get(`https://testing-255716.appspot.com/classrooms`, { withCredentials: true}).catch((err) => {
+		if (err.response.status === 401) {
+			// Loading overlay hide
+			$.LoadingOverlay('hide')
+			Swal.fire({
+			  type: 'error',
+			  title: 'Unauthorized',
+			  text: 'You need to log in'
+			})
+			.then(() => {
+				// Redirect to login
+				window.location.assign('login.html')
+			})
+		}
+	})
 	let classroomData = await resGetAllClassrooms.data
 
 	// Populate user data on the form
@@ -55,15 +83,23 @@ $(document).ready( async () => {
 		axios({
 			method: 'put',
 			url: urlUpdate,
+			withCredentials: true,
 			data: {
 				username: $('#usernameInput').val(),
+				password: $('#passwordInput').val() === $('#passwordInput2').val() ? $('#passwordInput').val() : '', // Check if password matched, if not send empty field
 				name: $('#nameInput').val(),
 				ClassroomId: $('#classInput').val()
 			}
 		})
 		.then((response) => {
-			// Redirect window back
-			window.location.assign('index.html')
+			// Loading overlay hide
+			$.LoadingOverlay('hide')
+			// Give user succsess feedback
+			Swal.fire({
+			  type: 'success',
+			  title: 'Update saved',
+			  text: 'You have successfully updated your account'
+			})
 		})
 		.catch((err) => {
 			console.log(err)
@@ -96,21 +132,36 @@ $(document).ready( async () => {
 				// Update via axios
 				axios({
 					method: 'delete',
-					url: urlDelete
+					url: urlDelete,
+					withCredentials: true
 				})
 				.then((response) => {
 					// Redirect window back
 					window.location.assign('index.html')
 				})
 				.catch((err) => {
-					console.log(err)
-					Swal.fire({
-					  type: 'error',
-					  title: 'Oops...',
-					  text: 'Something went wrong!'
-					})
-					// Loading overlay hide
-					$.LoadingOverlay('hide')
+					console.log(err.response)
+					// Define error data
+					let error = err.response.data
+					// Check error code
+					if (error.code === 401) {
+						// If error code is Unauthorized, then give user feedback
+						Swal.fire({
+						  type: 'error',
+						  title: 'Error' + ' ' + error.code,
+						  text: error.message
+						})
+						// Loading overlay hide
+						$.LoadingOverlay('hide')
+					} else {
+						Swal.fire({
+						  type: 'error',
+						  title: 'Error' + ' ' + error.code,
+						  text: error.message
+						})
+						// Loading overlay hide
+						$.LoadingOverlay('hide')
+					}
 				})
 		  }
 		})

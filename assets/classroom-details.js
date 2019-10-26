@@ -18,7 +18,21 @@ $(document).ready( async () => {
 	}
 
 	// Define response axios from finding class by id
-	let resGetClassroomDetails = await axios.get(`https://testing-255716.appspot.com/classrooms/find/${getQueryValue().id}`)
+	let resGetClassroomDetails = await axios.get(`https://testing-255716.appspot.com/classrooms/find/${getQueryValue().id}`, { withCredentials: true}).catch((err) => {
+		if (err.response.status === 401) {
+			// Loading overlay hide
+			$.LoadingOverlay('hide')
+			Swal.fire({
+			  type: 'error',
+			  title: 'Unauthorized',
+			  text: 'You need to log in'
+			})
+			.then(() => {
+				// Redirect to login
+				window.location.assign('login.html')
+			})
+		}
+	})
 	let classroomData = await resGetClassroomDetails.data[0]
 
 	// Populate user data on the form
@@ -56,7 +70,8 @@ $(document).ready( async () => {
 			url: urlUpdate,
 			data: {
 				name: $('#classNameInput').val()
-			}
+			},
+			withCredentials: true
 		})
 		.then((response) => {
 			// Redirect window back
@@ -93,7 +108,8 @@ $(document).ready( async () => {
 				// Update via axios
 				axios({
 					method: 'delete',
-					url: urlDelete
+					url: urlDelete,
+					withCredentials: true
 				})
 				.then((response) => {
 					// Redirect window back

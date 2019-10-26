@@ -17,14 +17,22 @@
     
     <div class="container">
      <div style="margin: 100px 0 100px 0">
-       <form>
+       <form id="formCreateUser">
         <div class="form-group">
           <label for="nameInput">Student Name</label>
-          <input type="text" class="form-control" id="nameInput" aria-describedby="emailHelp" placeholder="Enter name">
+          <input type="text" class="form-control" id="nameInput" aria-describedby="emailHelp" placeholder="Enter name" required>
         </div>
         <div class="form-group">
           <label for="usernameInput">Student Username</label>
-          <input type="text" class="form-control" id="usernameInput" aria-describedby="emailHelp" placeholder="Enter username">
+          <input type="text" class="form-control" id="usernameInput" aria-describedby="emailHelp" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+          <label for="usernameInput">Student Password</label>
+          <input type="password" class="form-control" id="passwordInput" aria-describedby="emailHelp" placeholder="Enter new password" required>
+        </div>
+        <div class="form-group">
+          <label for="usernameInput">Re-type Password</label>
+          <input type="password" class="form-control" id="passwordInput2" aria-describedby="emailHelp" placeholder="Re-type new password" required>
         </div>
         <div class="form-group">
           <label for="classInput">Select class</label>
@@ -55,7 +63,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- New-user Script -->
-    <script type="text/javascript" src="/class-api-frontend/assets/new-user.js"></script>
+    <script type="text/javascript" src="assets/new-user.js"></script>
 
   </body>
 </html>

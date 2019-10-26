@@ -12,14 +12,14 @@ $(document).ready( async () => {
 			url: urlSave,
 			data: {
 				name: $('#classNameInput').val()
-			}
+			},
+			withCredentials: true
 		})
 		.then((response) => {
 			// Redirect window back
 			window.location.assign('index.html')
 		})
 		.catch((err) => {
-			console.log(err)
 			Swal.fire({
 			  type: 'error',
 			  title: 'Oops...',

@@ -19,45 +19,22 @@
   <body>
     
     <div class="container">
-      <div style="margin: 50px 0 100px 0">
-        <button onclick="event.preventDefault(); logOut()" class="btn btn-secondary">Log Out</button>
-      </div>
-      <div style="margin: 100px 0 100px 0">
-        <div class="d-flex justify-content-between">
-          <h4>Table Users</h4>
-          <button onclick="event.preventDefault(); window.location.assign('new-user.html')" class="btn btn-primary">Insert new user</button>
+      <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
+        <div>
+          <h3 style="margin-bottom: 50px">Welcome to Class Admin Panel!</h3>
+          <form>
+            <div class="form-group">
+              <input name="username" type="email" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <div class="d-flex justify-content-center">
+              <button onclick="event.preventDefault(); login()" type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </form>
         </div>
-        <br>
-        <table id="users_table" class="display">
-          <thead>
-            <tr>
-              <th>UUID</th>
-              <th>Username</th>
-              <th>Student Name</th>
-              <th>Enrolled Class</th>
-              <th>Last Updated</th>
-            </tr>
-          </thead>
-          <tbody />
-       </table>
       </div>
-     <div style="margin: 100px 0 100px 0">
-      <div class="d-flex justify-content-between">
-        <h4>Table Classrooms</h4>
-        <button onclick="event.preventDefault(); window.location.assign('new-classroom.html')" class="btn btn-primary">Insert new classroom</button>
-      </div>
-      <br>
-       <table style="margin: 100px 0 100px 0" id="classrooms_table" class="display">
-          <thead>
-            <tr>
-              <th>UUID</th>
-              <th>Class Name</th>
-              <th>Last Updated</th>
-            </tr>
-          </thead>
-          <tbody />
-       </table>
-     </div>
     </div>
 
     <!-- Optional JavaScript -->
@@ -85,7 +62,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.20/dataRender/datetime.js"></script>
 
     <!-- Index Script -->
-    <script type="text/javascript" src="assets/index.js"></script>
+    <script type="text/javascript" src="assets/login.js"></script>
 
   </body>
 </html>
