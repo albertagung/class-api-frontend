@@ -31,7 +31,7 @@ $(document).ready(() => {
 					window.location.assign('index.html')
 				} else {
 					// Redirect window to user details
-					window.location.assign(`/user-details.html?id=${user.id}`)
+					window.location.assign(`user-details.html?id=${user.id}`)
 				}
 			})
 			.catch((err) => {
