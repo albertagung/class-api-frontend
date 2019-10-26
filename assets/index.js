@@ -12,9 +12,8 @@ $(document).ready( async () => {
         withCredentials: true
       },
       crossDomain: true,
-      error: (event, flag, message) => {
-        console.log(message)
-        if (message === 'Unauthorized') {
+      complete: (xhr, textStatus) => {
+        if (xhr.status === 401) {
           // Redirect window to login page
           Swal.fire({
             type: 'error',
@@ -26,6 +25,9 @@ $(document).ready( async () => {
             window.location.assign('login.html')
           })
         }
+      },
+      error: (event, flag, message) => {
+        console.log(message)
       }
   	},
   	columns: [
@@ -56,9 +58,8 @@ $(document).ready( async () => {
         withCredentials: true
       },
       crossDomain: true,
-      error: (event, flag, message) => {
-        console.log(message)
-        if (message === 'Unauthorized') {
+      complete: (xhr, textStatus) => {
+        if (xhr.status === 401) {
           // Redirect window to login page
           Swal.fire({
             type: 'error',
@@ -70,6 +71,9 @@ $(document).ready( async () => {
             window.location.assign('login.html')
           })
         }
+      },
+      error: (event, flag, message) => {
+        console.log(message)
       }
   	},
   	columns: [
